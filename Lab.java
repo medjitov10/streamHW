@@ -77,8 +77,9 @@ public class Lab {
     @Test
     public void getMaximumPaidEmployee() {
         Employee highest = employees.stream()
-                .max(Comparator.comparing(e -> e.getSalary()))
-                .get();
+                .reduce((acc, el) -> {
+                    return el.getSalary() > acc.getSalary() ? el : acc;
+                }).get();
         System.out.println("MAX employee salary: " + highest);
     }
 }
